@@ -1,0 +1,43 @@
+.hero {
+  position: relative; height: 100svh; overflow: hidden;
+  background: var(--black); color: var(--yellow);
+  --seam: 50svh;
+}
+/* Cada copia vive en su propio campo con overflow oculto: ninguna tapa a la otra. */
+.top, .bottom { position: absolute; left: 0; right: 0; overflow: hidden; }
+.top { top: 0; height: var(--seam); background: var(--yellow); color: var(--black); }
+.bottom { top: var(--seam); bottom: 0; color: var(--yellow); }
+.frame { position: absolute; left: 0; right: 0; height: 100svh; display: grid; place-items: center; }
+.top .frame { top: 0; }
+.bottom .frame { top: calc(var(--seam) * -1); }
+
+.headline {
+  font-size: clamp(3rem, 6.8vw, 8rem);
+  text-align: center; max-width: none;
+  /* La costura corta la segunda línea por la mitad */
+  transform: translateY(-0.43em);
+}
+.headline > .line, .headline :global(.line) { white-space: nowrap; }
+
+.bar {
+  position: absolute; z-index: 2; inset: 0 0 auto 0;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 28px var(--margin);
+}
+.logo { width: clamp(120px, 12vw, 172px); height: auto; margin: -18px 0 0 -10px; }
+.mark { display: block; }
+
+.support {
+  position: absolute; z-index: 2; left: 0; right: 0; margin-inline: auto; bottom: 40px;
+  width: min(52ch, calc(100% - 2 * var(--margin)));
+  text-align: center; font-size: var(--step-body); line-height: 1.45; color: var(--paper);
+}
+
+@media (max-width: 47.99em) {
+  .hero { --seam: 46svh; }
+  .headline { font-size: 11.2vw; }
+  .bar { padding: 16px var(--margin); align-items: center; }
+  .logo { width: 104px; margin: -10px 0 -10px -8px; }
+  .bar :global(.button) { min-height: 2.75rem; padding: 0 1rem; font-size: 0.9375rem; }
+  .support { left: var(--margin); right: auto; margin: 0; text-align: left; bottom: 28px; }
+}

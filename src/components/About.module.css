@@ -1,0 +1,10 @@
+.section { background: var(--paper-2); padding: clamp(80px, 11vw, 180px) var(--margin); }
+.story {
+  max-width: none; columns: 2; column-gap: 32px;
+  font-size: clamp(1.375rem, 2.1vw, 2rem); line-height: 1.18; color: #574b42; font-weight: 500;
+  hyphens: auto;
+}
+.story b { color: var(--black); font-weight: 800; }
+@media (max-width: 47.99em) {
+  .story { columns: 1; font-size: 1.375rem; line-height: 1.25; }
+}

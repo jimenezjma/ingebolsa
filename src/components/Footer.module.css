@@ -1,0 +1,31 @@
+.footer { display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; background: var(--black); color: var(--paper); }
+.photo { position: relative; overflow: hidden; }
+/* Recorte cerrado sobre la excavadora del video */
+.photo video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 18% 72%; scale: 1.6; transform-origin: 18% 72%; }
+
+.side { display: flex; flex-direction: column; padding: 56px var(--margin) 24px calc(var(--margin) * 2); }
+.logo { width: 132px; height: auto; margin: -16px 0 24px -8px; }
+.menu { display: grid; gap: 20px; }
+.menu a {
+  display: inline-block; text-decoration: none; color: var(--yellow);
+  font-size: min(var(--step-head), 4.4vw); font-weight: 800; line-height: 1;
+  font-stretch: 100%; font-variation-settings: "wdth" 100;
+  transition: transform 260ms var(--ease-out), color var(--t-hover) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .menu:hover a { color: #a99a5a; }
+  .menu a:hover { color: var(--yellow); transform: translateX(12px); }
+}
+.blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 64px; font-size: var(--step-body); }
+.label { color: #b9ada1; margin-bottom: 4px; }
+.legal { margin-top: auto; padding-top: 48px; font-size: var(--step-small); color: #b9ada1; max-width: 62ch; }
+.legal a { color: inherit; }
+
+@media (max-width: 47.99em) {
+  .footer { grid-template-columns: 1fr; min-height: 0; }
+  .photo { height: 50svh; }
+  .side { padding: 40px var(--margin) 24px; }
+  .menu { gap: 20px; }
+  .menu a { font-size: 2.25rem; }
+  .blocks { grid-template-columns: 1fr; margin-top: 40px; }
+}

@@ -1,0 +1,113 @@
+// IngeBolsa — modelo de datos
+// Desarrollo: SQLite (archivo local). Producción: cambiar provider a "postgresql"
+// y DATABASE_URL a la base gestionada (Neon, Supabase, RDS…). El esquema no cambia.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// Familia de equipos: Excavadoras, Retrocargadoras, Compactación…
+model Category {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  /// Nombre corto para la vitrina en cartel ("Retros")
+  shortName   String?
+  /// Frase corta para la vitrina ("De 1,7 a 22 toneladas")
+  summary     String?
+  order       Int       @default(0)
+  machines    Machine[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+/// Un equipo publicado en la web.
+model Machine {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String // "Excavadora 20 t"
+  brand       String
+  model       String
+  year        Int?
+  /// NUEVA | USADA
+  condition   String   @default("NUEVA")
+  /// DISPONIBLE | RESERVADA | VENDIDA | BAJO_PEDIDO
+  status      String   @default("DISPONIBLE")
+  /// Horómetro, solo para usadas
+  hours       Int?
+  /// Precio en pesos colombianos; null = "a consultar"
+  priceCop    BigInt?
+  city        String   @default("Bogotá")
+  summary     String
+  description String?
+  featured    Boolean  @default(false)
+  published   Boolean  @default(true)
+
+  /// Cifras clave en columnas propias para filtrar, ordenar y comparar.
+  powerHp           Int?
+  operatingWeightKg Int?
+
+  categoryId String
+  category   Category      @relation(fields: [categoryId], references: [id])
+  specs      Spec[]
+  images     MachineImage[]
+  requests   QuoteRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([status, published])
+}
+
+/// Ficha técnica: filas libres agrupadas (Motor, Dimensiones, Capacidades…).
+/// Cada categoría tiene datos distintos, por eso no son columnas fijas.
+model Spec {
+  id        String  @id @default(cuid())
+  machineId String
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  group     String // "Motor"
+  label     String // "Potencia neta"
+  value     String // "148"
+  unit      String? // "HP"
+  order     Int     @default(0)
+
+  @@index([machineId])
+}
+
+model MachineImage {
+  id        String  @id @default(cuid())
+  machineId String
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String
+  order     Int     @default(0)
+
+  @@index([machineId])
+}
+
+/// Solicitud enviada desde el formulario de la web.
+model QuoteRequest {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  email     String?
+  company   String?
+  city      String?
+  /// COMPRA | ALQUILER | REPUESTOS | OTRO
+  kind      String   @default("COMPRA")
+  message   String
+  machineId String?
+  machine   Machine? @relation(fields: [machineId], references: [id], onDelete: SetNull)
+  /// NUEVA | CONTACTADA | COTIZADA | CERRADA
+  status    String   @default("NUEVA")
+  source    String   @default("web")
+  createdAt DateTime @default(now())
+
+  @@index([status, createdAt])
+}
