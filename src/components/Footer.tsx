@@ -4,12 +4,12 @@ import { site, whatsappUrl } from "@/lib/site";
 import s from "./Footer.module.css";
 
 const menu = [
-  { href: "/#equipos", label: "Equipos" },
-  { href: "/#inventario", label: "Inventario" },
-  { href: "/#comparar", label: "Comparar" },
+  { href: "/", label: "Inicio" },
+  { href: "/movimiento-de-tierras", label: "Movimiento de tierras" },
+  { href: "/mineria", label: "Minería" },
   { href: "/#como-comprar", label: "Cómo se compra" },
   { href: "/#nosotros", label: "Nosotros" },
-  { href: "/#pedir", label: "Pedir cotización" },
+  { href: "/#pedir", label: "Contacto" },
 ];
 
 /** `onlyVideo`: en páginas sin las fotos de la portada, acredita solo el video del pie. */

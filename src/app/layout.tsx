@@ -3,9 +3,9 @@ import { Reveal } from "@/components/Reveal";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "IngeBolsa · Maquinaria para obra",
+  title: "IngeBolsa · Movimiento de tierras y minería",
   description:
-    "Excavadoras, retrocargadoras, minicargadores, compactación y plantas eléctricas en Colombia. Ficha técnica completa y cotización por WhatsApp.",
+    "Maquinaria para movimiento de tierras y minería en Colombia. Inventario con fichas técnicas, catálogos por familia y asesoría por WhatsApp.",
   icons: { icon: "/logo-ingebolsa.png" },
 };
 

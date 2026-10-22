@@ -1,8 +1,8 @@
 # IngeBolsa: web de maquinaria
 
-Vitrina y catálogo de IngeBolsa (venta de maquinaria para obra en Colombia). Fase 1: landing con
-inventario desde base de datos, ficha técnica por equipo, comparador y formulario de solicitud que
-guarda en la base y continúa por WhatsApp (+57 315 501 4058).
+Vitrina y catálogo de IngeBolsa en Colombia. La home presenta dos líneas: movimiento de tierras
+(`/movimiento-de-tierras`), con inventario, fichas, comparador y formulario, y minería (`/mineria`),
+con familias de equipos y catálogos PDF. Contacto por WhatsApp (+57 315 501 4058).
 
 > **Estado: prototipo. No publicar todavía.** El inventario y las afirmaciones comerciales son de muestra.
 > El formulario almacena datos personales y requiere una política de tratamiento y controles contra abuso
@@ -40,7 +40,9 @@ prisma/
   seed.ts              inventario de MUESTRA (reemplazar)
 src/
   app/
-    page.tsx           landing (lee categorías y equipos de la base)
+    page.tsx           home con acceso a ambas líneas
+    movimiento-de-tierras/ catálogo existente conectado a la base
+    mineria/           catálogo estático de siete familias
     equipos/[slug]/    ficha técnica de cada equipo
     api/solicitudes/   POST del formulario → QuoteRequest
   components/          una sección por archivo, con su .module.css
@@ -85,3 +87,29 @@ docs/credits.json      fuente, autor y licencia de cada imagen descargada
 - El inventario del seed, las fichas técnicas y el texto de "Nosotros" son de muestra.
 - Las fotos son de colecciones abiertas (Wikimedia Commons, The Met) y muestran el mundo de la obra,
   no equipos de IngeBolsa. Se acreditan en el pie. Reemplazarlas por fotos propias cuando existan.
+
+
+## Catálogos de minería
+
+El contenido está en `src/lib/mining.ts`, sin tablas ni API adicionales. Las siete familias y sus
+identificadores son estables. Las descripciones son propuestas para validar con el cliente.
+
+- Mientras `catalogPdf` no esté definido, se muestra “Solicitar catálogo por WhatsApp” con la familia en el mensaje.
+- Para habilitar una descarga, guardar el PDF real en `public/catalogos/mineria/` y añadir su ruta pública
+  en `catalogPdf`, por ejemplo `/catalogos/mineria/trituradoras-de-cono.pdf`. Verificar el archivo antes de habilitar el enlace.
+- Para añadir una foto real, colocarla en `public/img/mineria/` y definir `image: { src, alt }` con su ruta y descripción.
+- Las descargas no requieren formulario. El selector automático de equipos queda para una fase posterior.
+- Las fichas existentes siguen en `/equipos/[slug]`. Los enlaces antiguos de categorías, inventario,
+  y comparador en la home muestran un acceso a su nueva ubicación. “Cómo se compra” está en la home, antes del contacto.
+
+El cuestionario de trituración está en `/mineria/cuestionario` y tiene un acceso al inicio y al final
+de la página de minería. Cuando estén definidos `RESEND_API_KEY`, `MINING_INQUIRY_FROM` (correo de un
+dominio remitente verificado) y `MINING_INQUIRY_TO` en el entorno del servidor, su API enviará las
+respuestas por correo. Hasta entonces, el formulario se puede revisar pero el botón de envío queda
+deshabilitado y se ofrece WhatsApp. El correo solo se marca como enviado si el proveedor acepta la
+solicitud; no se guardan respuestas de minería en la base de datos. Antes de abrirlo al público, añadir
+protección contra abuso y publicar la política de tratamiento de datos.
+
+Las siete imágenes de minería son referencias generadas con image_gen, guardadas en `public/img/mineria/`
+como WebP de 640 × 480 px (aproximadamente 25–35 KB cada una). No representan modelos ni existencias reales.
+Los prompts y la procedencia están en `docs/mineria-imagenes.json`.

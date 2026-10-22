@@ -1,0 +1,40 @@
+.header { background: var(--yellow); }
+.intro { padding: 36px var(--margin) 88px; }
+.back { display: inline-block; margin-top: 32px; font-weight: 700; text-decoration: none; }
+.back:hover { text-decoration: underline; }
+.intro h1 { max-width: 12ch; font-size: clamp(3.1rem, 8vw, 8rem); }
+.intro p { max-width: 52ch; margin-top: 40px; font-size: var(--step-lead); }
+.references { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--paper-2); }
+.references img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.form { padding: 88px var(--margin) 120px; }
+.formIntro { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: end; margin-bottom: 48px; }
+.notice { margin-top: 16px; font-weight: 700; }
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
+.field { display: flex; flex-direction: column; align-items: stretch; gap: 10px; min-width: 0; }
+.label { font-weight: 700; line-height: 1.25; max-width: 50ch; }
+.hint { font-size: 0.9375rem; color: var(--muted); line-height: 1.35; }
+.field input, .field textarea, .field select { width: 100%; min-height: 56px; background: var(--paper-2); border: 0; border-radius: 0; padding: 14px 16px; font-size: 1rem; }
+.field textarea { resize: vertical; }
+.field input:focus, .field textarea:focus, .field select:focus { background: var(--yellow-light); }
+.group { border: 0; margin: 80px 0 0; padding: 0; min-width: 0; }
+.group legend { width: 100%; padding: 0; margin-bottom: 40px; font-size: var(--step-head); font-weight: 800; line-height: 1; }
+.submitArea { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 80px; }
+.submitArea p { font-size: 0.9375rem; }
+.submitArea .pending { flex-basis: 100%; font-size: var(--step-body); font-weight: 700; }
+.submitArea button:disabled { opacity: 0.55; cursor: not-allowed; }
+.submitArea .error { flex-basis: 100%; color: #a22b1b; font-weight: 700; }
+.success { min-height: 55vh; padding: 120px var(--margin); background: var(--paper-2); }
+.success h2, .success p { margin-bottom: 32px; }
+@media (max-width: 47.99em) {
+  .intro { padding-bottom: 64px; }
+  .back { margin-top: 28px; }
+  .intro h1 { font-size: 11vw; }
+  .intro p { margin-top: 28px; }
+  .references { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .form { padding-block: 64px 88px; }
+  .formIntro, .fields { grid-template-columns: 1fr; }
+  .formIntro { gap: 20px; }
+  .group { margin-top: 64px; }
+  .group legend { margin-bottom: 28px; }
+  .submitArea { margin-top: 64px; }
+}

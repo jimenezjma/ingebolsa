@@ -6,7 +6,7 @@ import s from "./Steps.module.css";
 const steps = [
   {
     name: "Pregunte",
-    text: "Cuéntenos qué obra tiene, qué terreno y en qué ciudad. Por WhatsApp o con el formulario de esta página.",
+    text: "Cuéntenos qué obra tiene, qué terreno y en qué ciudad. Escríbanos por WhatsApp para empezar.",
     img: { src: "/img/obras-del-metro-bogotano.jpg", alt: "Grúas y cerramiento de las obras del Metro de Bogotá" },
   },
   {

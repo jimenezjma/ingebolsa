@@ -19,14 +19,6 @@
 }
 .headline > .line, .headline :global(.line) { white-space: nowrap; }
 
-.bar {
-  position: absolute; z-index: 2; inset: 0 0 auto 0;
-  display: flex; justify-content: space-between; align-items: flex-start;
-  padding: 28px var(--margin);
-}
-.logo { width: clamp(120px, 12vw, 172px); height: auto; margin: -18px 0 0 -10px; }
-.mark { display: block; }
-
 .support {
   position: absolute; z-index: 2; left: 0; right: 0; margin-inline: auto; bottom: 40px;
   width: min(52ch, calc(100% - 2 * var(--margin)));
@@ -36,8 +28,5 @@
 @media (max-width: 47.99em) {
   .hero { --seam: 46svh; }
   .headline { font-size: 11.2vw; }
-  .bar { padding: 16px var(--margin); align-items: center; }
-  .logo { width: 104px; margin: -10px 0 -10px -8px; }
-  .bar :global(.button) { min-height: 2.75rem; padding: 0 1rem; font-size: 0.9375rem; }
   .support { left: var(--margin); right: auto; margin: 0; text-align: left; bottom: 28px; }
 }

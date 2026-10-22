@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SiteNav } from "@/components/SiteNav";
 import { Footer } from "@/components/Footer";
 import { formatCop, formatKg, getMachine, statusLabel } from "@/lib/catalog";
 import { whatsappUrl } from "@/lib/site";
@@ -24,20 +25,14 @@ export default async function MachinePage({ params }: Props) {
   const groups = Object.entries(
     m.specs.reduce<Record<string, typeof m.specs>>((acc, sp) => ((acc[sp.group] ??= []).push(sp), acc), {}),
   );
-  const wa = whatsappUrl(`Hola IngeBolsa, quiero cotizar: ${m.name} ${m.brand} ${m.model}${m.year ? ` (${m.year})` : ""}.`);
+  const quoteMessage = `Hola IngeBolsa, quiero cotizar: ${m.name} ${m.brand} ${m.model}${m.year ? ` (${m.year})` : ""}.`;
+  const wa = whatsappUrl(quoteMessage);
 
   return (
     <>
       <header className={s.head}>
-        <div className={s.bar}>
-          <Link href="/" aria-label="IngeBolsa, inicio">
-            <Image src="/logo-ingebolsa.png" alt="IngeBolsa" width={579} height={579} className={s.logo} priority />
-          </Link>
-          <div className={s.barActions}>
-            <Link className="link" href="/#inventario">Volver al inventario</Link>
-            <a className="button" href={wa} target="_blank" rel="noopener">Cotizar por WhatsApp</a>
-          </div>
-        </div>
+        <SiteNav quoteMessage={quoteMessage} />
+        <Link className={`${s.back} link`} href="/movimiento-de-tierras#inventario">Volver al inventario</Link>
         <h1 className={`${s.title} poster lines`}>
           <span className="line"><span data-line>{m.name}</span></span>
         </h1>
@@ -88,7 +83,7 @@ export default async function MachinePage({ params }: Props) {
           <p className={s.ctaLine}>¿Le sirve esta máquina?</p>
           <div className={s.ctaActions}>
             <a className="button button--yellow" href={wa} target="_blank" rel="noopener">Cotizar por WhatsApp</a>
-            <Link className="link" href="/#pedir">Usar el formulario</Link>
+            <Link className="link" href="/movimiento-de-tierras#pedir">Usar el formulario</Link>
           </div>
         </section>
       </main>

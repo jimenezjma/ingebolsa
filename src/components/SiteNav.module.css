@@ -1,0 +1,14 @@
+.bar { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px var(--margin); background: var(--yellow); color: var(--black); }
+.mark { flex-shrink: 0; }
+.logo { width: 116px; height: auto; margin: -12px 0 -12px -8px; }
+.menu { display: flex; align-items: center; gap: clamp(16px, 2.5vw, 40px); }
+.menu a { padding-block: 12px; text-decoration: none; font-weight: 650; }
+.menu a[aria-current="page"], .menu a:hover { text-decoration: underline; text-underline-offset: 6px; }
+@media (max-width: 65em) { .quote { font-size: 0.9375rem; padding-inline: 16px; } .bar { gap: 16px; } .menu { gap: 16px; font-size: 1rem; } }
+@media (max-width: 47.99em) {
+  .bar { flex-wrap: wrap; padding-block: 16px; gap: 12px; }
+  .logo { width: 88px; }
+  .menu { order: 3; width: 100%; justify-content: space-between; gap: 12px; }
+  .menu a { font-size: 0.9375rem; padding-block: 10px; }
+  .quote { min-height: 44px; }
+}

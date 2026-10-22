@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { site, whatsappUrl } from "@/lib/site";
+import { SiteNav } from "./SiteNav";
+import { site } from "@/lib/site";
 import s from "./Hero.module.css";
 
 // Dos copias del titular, cada una recortada a su campo: amarillo arriba, negro abajo.
@@ -16,21 +16,14 @@ function Headline({ hidden }: { hidden?: boolean }) {
 export function Hero() {
   return (
     <header className={s.hero}>
-      <div className={s.bar}>
-        <a href="#top" className={s.mark} aria-label="IngeBolsa, inicio">
-          <Image src="/logo-ingebolsa.png" alt="IngeBolsa" width={579} height={579} priority className={s.logo} />
-        </a>
-        <a className="button" href={whatsappUrl("Hola IngeBolsa, quiero cotizar maquinaria.")} target="_blank" rel="noopener">
-          Cotizar por WhatsApp
-        </a>
-      </div>
+      <SiteNav />
 
-      <h1 className="sr-only">IngeBolsa: máquinas a la obra</h1>
+      <h1 className="sr-only">IngeBolsa: maquinaria para movimiento de tierras y minería</h1>
       <div className={s.top}><div className={s.frame}><Headline /></div></div>
       <div className={s.bottom} aria-hidden="true"><div className={s.frame}><Headline hidden /></div></div>
 
       <p className={s.support} data-rise>
-        Excavadoras, retros, minicargadores, rodillos y plantas eléctricas, nuevas y usadas, con ficha técnica completa.
+        Maquinaria para movimiento de tierras y minería. Explore nuestras dos líneas y encuentre el equipo para su proyecto.
         Llame o escriba al <a className="link nums" style={{ whiteSpace: "nowrap" }} href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a>.
       </p>
     </header>

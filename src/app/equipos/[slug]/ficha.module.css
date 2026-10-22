@@ -1,10 +1,8 @@
-.head { background: var(--yellow); color: var(--black); padding: 0 var(--margin) clamp(48px, 6vw, 96px); }
-.bar { display: flex; justify-content: space-between; align-items: flex-start; padding-block: 28px; }
-.logo { width: clamp(104px, 10vw, 148px); height: auto; margin: -16px 0 0 -8px; }
-.barActions { display: flex; align-items: center; gap: 28px; }
-.title { font-size: clamp(2.75rem, 6.4vw, 7.5rem); margin-top: clamp(40px, 7vw, 120px); }
+.head { background: var(--yellow); color: var(--black); padding-bottom: clamp(48px, 6vw, 96px); }
+.back { display: inline-flex; align-items: center; min-height: 44px; margin: 24px var(--margin) 0; }
+.title { font-size: clamp(2.75rem, 6.4vw, 7.5rem); margin: clamp(24px, 4vw, 64px) var(--margin) 0; }
 @media (max-width: 63.99em) { .title { font-stretch: 100%; font-variation-settings: "wdth" 100; } }
-.model { font-size: var(--step-lead); font-weight: 600; margin-top: 16px; }
+.model { font-size: var(--step-lead); font-weight: 600; margin: 16px var(--margin) 0; }
 
 .main { background: var(--paper); }
 .facts { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); padding: clamp(64px, 8vw, 128px) var(--margin); }
@@ -31,10 +29,6 @@
 .ctaActions :global(.button--yellow) { background: var(--black); color: var(--yellow); }
 
 @media (max-width: 47.99em) {
-  .bar { padding-block: 16px; align-items: center; }
-  .barActions :global(.link) { display: none; }
-  .bar :global(.button) { min-height: 2.75rem; padding: 0 1rem; font-size: 0.9375rem; }
-  .logo { width: 96px; margin: -8px 0 -8px -6px; }
   .title { font-size: 9.6vw; }
   .facts { display: block; }
   .key { margin-top: 40px; }
